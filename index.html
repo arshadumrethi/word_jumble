@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css">
-    <link rel="script" href="script.js">
     <title>Word Jumble by Arshad</title>
 
     <h1>WORD JUMBLE</h1>
@@ -12,40 +11,45 @@
   </head>
 
   <body>
-    <h3>Choose a Difficulty Level</h3>
+    <h3 style="color:Blue"> Follow steps 1, 2 & 3</h3>
 
+    <h3>1. Choose a Difficulty Level</h3>
     <div class="wrapper">
-      <button type="button" class="button" onclick="levelChoice('1')">1</button>
+      <button type="button" id="level-btn" class="button" onclick="levelChoice('1')">1</button>
       <button type="button" class="button" onclick="levelChoice('2')">2</button>
       <button type="button" class="button" onclick="levelChoice('3')">3</button>
       <button type="button" class="button" onclick="levelChoice('4')">4</button>
       <button type="button" class="button" onclick="levelChoice('5')">5</button>
     </div>
-    <br>
+    <h3 id="levelselected"></h3>
+    <h3>2. Now Click: </h3>
+    <div class="wrapper">
+      <button type="button" class="button" style="padding:10px 20px" onclick="runGame()">Run Game</button>
+    </div>
+
+    <h3>3. Un-Jumble this word: </h3>
+    <h2 id="jumbled"></h2>
     <br>
 
     <div class="wrapper">
-      <button type="button" class="button" onclick="runGame()">Run Game</button>
+      <form class="" action="">
+        <input id="answer" type="text" placeholder="Type Answer..." value="">
+        <br>
+        <br>
+        <button type="button" class="enter" onclick="match()">Enter</button>
+      </form>
     </div>
     <br>
-    <h3>Un-Jumble this: </h3>
 
-    <h2 id="jumbledWord" style="font-style: italic;">placeholder</h2>
+    <h2 id="result" style="color:Red"></h2>
     <br>
-
     <div class="wrapper">
-      <input type="text" name="" placeholder="Enter Answer..." value="">
+      <button type="button" class="button" style="padding:10px 15px" onclick="playAgain()">Play Again</button>
     </div>
 
-    <br>
-    <h2>Result: </h2>
-    <h3 style="font-style: italic;">placeholder</h3>
 
 
 
-
-
-
-
+    <script src="script.js"></script>
   </body>
 </html>

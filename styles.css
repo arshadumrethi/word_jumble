@@ -20,11 +20,11 @@ h3 {
   background-color: White; /* Green */
   border: 1px solid Black;
   color: Black;
-  padding: 15px 32px;
+  padding: 10px 20px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
-  border-radius: 12px
+  border-radius: 20px;
 }
 
 .button:hover {
@@ -38,10 +38,37 @@ h3 {
   transform: translateY(4px);
 }
 
-input {
+
+
+#answer {
   border-style: solid;
   border-width: 2px 2px 2px 2px;
   height: 40px;
   width: 250px;
   font-size: 16pt;
+}
+
+.enter {
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  height: 40px;
+  width: 100px;
+  font-size: 16pt;
+  border-radius: 9px;
+}
+
+.enter:active {
+  background-color: Red;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#jumbled {
+  color: green;
+  font-size: 26pt;
+
+}
+
+#result {
+  font-style: italic;
 }

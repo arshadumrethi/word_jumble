@@ -1,3 +1,6 @@
+// Create object to contain words at every level in increasing Difficulty.
+// Starting with 4 letter words at level 1 and going up to 8 letter words
+// at level 5.
 const words = {
   1: ["door", "fork", "crew", "bird", "joke", "quiz", "hazy", "maze", "numb", "howl"],
   2: ["spoon", "knife", "board", "shine", "quilt", "clock", "judge", "clone", "clown", "jewel"],
@@ -6,6 +9,7 @@ const words = {
   5: ["paradise", "language", "business", "syllable", "treasure", "equation", "sandwich", "february", "champion", "umbrella"]
 }
 
+// Create shuffle function using fisher yates algorithm in order to jumble words.
 String.prototype.shuffle = function () {
     var a = this.split(""),
         n = a.length;
@@ -19,19 +23,50 @@ String.prototype.shuffle = function () {
     return a.join("");
 }
 
-var num;
-var jumbledWord = document.getElementById('jumbledWord');
+// Initialize global variables that will be used in functions.
+let num;
+let jumbled = document.getElementById('jumbled');
+let word = "";
+let result = document.getElementById("result");
+let levelselected = document.getElementById("levelselected");
+let buttons = document.getElementsByClassName("button");
 
+// Create a function that will be called on clicking the level buttons
+// this will set the level - num will be an integer passed to wordChoice function.
+function levelChoice(n) {
+  buttons.style.backgroundColor = "Blue";
+  levelselected.textContent = "Current level selected: " + n;
+  return num = n;
+}
 
-// function levelChoice(n) {
-//   return num = n;
-// }
-
+// This function will access the words object and select a random word from the
+// selceted array. The word selected is then shuffled using the shuffle function.
 function wordChoice(num) {
-  let word = words[num][Math.floor(Math.random() * words[num].length)];
+  word = words[num][Math.floor(Math.random() * words[num].length)];
   return word.shuffle();
 }
 
+// runGame function will be called when runGame button is clicked and will display
+// the jumbled word at an h3 element whose id name is "jumbled".
 function runGame() {
-  return console.log(wordChoice(2));
+  jumbled.textContent = wordChoice(num);
+}
+
+// match function will check if answer entered in input matches the original word.
+// returns success message or try again message.
+function match() {
+  let answer = document.getElementById("answer").value;
+
+  if (answer == word) {
+    console.log("yeah");
+    result.textContent = "You got it!";
+  } else {
+    console.log("nah");
+    result.textContent = "That's not it";
+  }
+}
+
+// Refresh the page and reload game.
+function playAgain() {
+    location.reload();
 }
