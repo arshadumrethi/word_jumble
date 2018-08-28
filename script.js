@@ -44,7 +44,12 @@ function levelChoice(n) {
 // selceted array. The word selected is then shuffled using the shuffle function.
 function wordChoice(num) {
   word = words[num][Math.floor(Math.random() * words[num].length)];
-  return word.shuffle();
+  shuffledWord = word.shuffle();
+  if (word === shuffledWord) {
+    wordChoice(num);
+  } else {
+    return shuffledWord;
+  }
 }
 
 // runGame function will be called when runGame button is clicked and will display
@@ -56,9 +61,11 @@ function runGame() {
 // match function will check if answer entered in input matches the original word.
 // returns success message or try again message.
 function match(e) {
-  e.preventDefault();
-  let answer = document.getElementById("answer").value;
 
+  let answer = document.getElementById("answer").value;
+  while (answer == "") {
+    return e.preventDefault();
+  }
   if (answer == word) {
     console.log("yeah");
     result.textContent = "You got it!";
