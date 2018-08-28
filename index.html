@@ -15,13 +15,13 @@
 
     <h3>1. Choose a Difficulty Level</h3>
     <div class="wrapper">
-      <button type="button" id="level-btn" class="button" onclick="levelChoice('1')">1</button>
+      <button type="button" class="button" onclick="levelChoice('1')">1</button>
       <button type="button" class="button" onclick="levelChoice('2')">2</button>
       <button type="button" class="button" onclick="levelChoice('3')">3</button>
       <button type="button" class="button" onclick="levelChoice('4')">4</button>
       <button type="button" class="button" onclick="levelChoice('5')">5</button>
     </div>
-    <h3 id="levelselected"></h3>
+    <h3 id="levelselected" style="color:#4286f4"></h3>
     <h3>2. Now Click: </h3>
     <div class="wrapper">
       <button type="button" class="button" style="padding:10px 20px" onclick="runGame()">Run Game</button>
@@ -33,7 +33,7 @@
 
     <div class="wrapper">
       <form class="" action="">
-        <input id="answer" type="text" placeholder="Type Answer..." value="">
+        <input id="answer" type="text" placeholder="Type Answer...then click.." value="">
         <br>
         <br>
         <button type="button" class="enter" onclick="match()">Enter</button>

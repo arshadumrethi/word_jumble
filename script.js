@@ -29,12 +29,13 @@ let jumbled = document.getElementById('jumbled');
 let word = "";
 let result = document.getElementById("result");
 let levelselected = document.getElementById("levelselected");
-let buttons = document.getElementsByClassName("button");
+let buttons = document.querySelector("button");
+
 
 // Create a function that will be called on clicking the level buttons
 // this will set the level - num will be an integer passed to wordChoice function.
 function levelChoice(n) {
-  buttons.style.backgroundColor = "Blue";
+  // buttons.style.backgroundColor = "Blue";
   levelselected.textContent = "Current level selected: " + n;
   return num = n;
 }
@@ -54,7 +55,8 @@ function runGame() {
 
 // match function will check if answer entered in input matches the original word.
 // returns success message or try again message.
-function match() {
+function match(e) {
+  e.preventDefault();
   let answer = document.getElementById("answer").value;
 
   if (answer == word) {
@@ -64,7 +66,9 @@ function match() {
     console.log("nah");
     result.textContent = "That's not it";
   }
+
 }
+
 
 // Refresh the page and reload game.
 function playAgain() {
