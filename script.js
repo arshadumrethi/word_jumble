@@ -62,10 +62,12 @@ function runGame() {
 // returns success message or try again message.
 function match(e) {
 
-  let answer = document.getElementById("answer").value;
+  var answer = document.getElementById("answer").value;
+
   while (answer == "") {
     return e.preventDefault();
   }
+
   if (answer == word) {
     console.log("yeah");
     result.textContent = "You got it!";
@@ -75,6 +77,18 @@ function match(e) {
   }
 
 }
+
+// answer.addEventListener("keydown", function (e) {
+//   if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
+//       match();
+//   }
+// });
+
+// answer.onkeyup = function(e){
+//   if(e.keyCode == 13){
+//      match();
+//   }
+// }
 
 
 // Refresh the page and reload game.
