@@ -24,12 +24,12 @@ String.prototype.shuffle = function () {
 }
 
 // Initialize global variables that will be used in functions.
-let num;
-let jumbled = document.getElementById('jumbled');
-let word = "";
-let result = document.getElementById("result");
-let levelselected = document.getElementById("levelselected");
-let buttons = document.querySelector("button");
+var num;
+var jumbled = document.getElementById('jumbled');
+var word = "";
+var result = document.getElementById("result");
+var levelselected = document.getElementById("levelselected");
+var buttons = document.querySelector("button");
 
 
 // Create a function that will be called on clicking the level buttons
@@ -62,34 +62,33 @@ function runGame() {
 // returns success message or try again message.
 function match(e) {
 
+  //Initialize Variable and set it to value of input form.
   var answer = document.getElementById("answer").value;
 
+  //Prevent match being called when input form is empty.
   while (answer == "") {
     return e.preventDefault();
   }
 
+  //Conditional Logic
   if (answer == word) {
-    console.log("yeah");
-    result.textContent = "You got it!";
+    // console.log("yeah");
+    result.textContent = "You got it! Wana Play Again?";
   } else {
-    console.log("nah");
-    result.textContent = "That's not it";
+    // console.log("nah");
+    result.textContent = "That's not it, try again";
   }
 
 }
 
-// answer.addEventListener("keydown", function (e) {
-//   if (e.keyCode === 13) {  //checks whether the pressed key is "Enter"
-//       match();
-//   }
-// });
-
-// answer.onkeyup = function(e){
-//   if(e.keyCode == 13){
-//      match();
-//   }
-// }
-
+//Match function called if Key:Enter is pressed.
+answer.addEventListener('keypress', function (e) {
+    var key = e.keyCode;
+    if (key === 13) { // 13 is enter
+      match()
+      e.preventDefault();
+    }
+});
 
 // Refresh the page and reload game.
 function playAgain() {
