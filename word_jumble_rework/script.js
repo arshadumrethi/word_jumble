@@ -30,52 +30,117 @@ function levelChoice(n) {
     console.log("Level is " + lvl);
   }
 
-function showJumbledWord() {
-    word = words[lvl][Math.floor(Math.random() * words[lvl].length)];
-    shuffledWord = word.shuffle();
+function runGame() {
+    //Get a word from the dataset
+    unShuffledWord = words[lvl][Math.floor(Math.random() * words[lvl].length)];
+
+    //Shuffle the word
+    shuffledWord = unShuffledWord.shuffle();
+
+    //Initialize UI vars
     let jumbledWord = document.getElementById('jumbledWord');
     let message = document.getElementById('message');
- 
-    if (word === shuffledWord) {
-    showJumbledWord(lvl);
+    
+    //Error handling: We dont want the shuffled word to be the same as the original word
+    if (unShuffledWord === shuffledWord) {
+    
+    //Run the function again 
+    runGame(lvl);
+    
     } else {
+    //Create and Display a message,jumbled word and input
+
+    //Display message 
     message.textContent = "Un-jumble this word:"
+
+    //Display the jumbled word
     jumbledWord.textContent = shuffledWord;
-    return runGame();
+
+    //Create Input Container
+    let inputContainer = document.getElementById('inputContainer');
+
+    //Create Input
+    let myInput = document.createElement('input');
+    myInput.className = 'form-control';
+    myInput.id = 'result';
+    myInput.placeholder = 'Answer..'
+
+    //Create Submit Button
+    let myBtn = document.createElement('button');
+    myBtn.className = "btn btn-primary mt-1";
+    myBtn.type = "submit";
+    myBtn.textContent = "Submit";
+
+    //Append Input and Button to Input Container
+    inputContainer.appendChild(myInput);
+    inputContainer.appendChild(myBtn);
+    // form.style.display = 'block';
+
+    //Check if Input value matches Un Shuffled Word
+    function matched() {
+        if(myInput.value === unShuffledWord) {
+            success();
+        } else {
+            fail();
+        }
     }
-}
 
-
-function runGame(){
-    createInput()
-    function createInput(){
-    
-        let inp = document.getElementById('inp');
-
-        let myInput = document.createElement('input');
-        myInput.className = 'form-control';
-        myInput.id = 'result';
-        myInput.placeholder = 'Answer..'
-    
-        let myBtn = document.createElement('button');
-        myBtn.className = "btn btn-primary mt-1";
-        myBtn.type = "submit";
-        myBtn.textContent = "Submit";
-
-        inp.appendChild(myInput);
-        inp.appendChild(myBtn);
-        // form.style.display = 'block';
+    function success() {
+        myInput.style.borderColor = 'green';
+        successMessage = document.getElementById('successMessage');
+        successMessage.style.color = 'green';
+        successMessage.textContent = 'You Win';
+        playAgain()
         
     }
 
-    function check() {
-        console.log('Yes');
+    function fail() {
+        myInput.value = ""
+        successMessage.textContent = 'Try again';
+        playAgain()
     }
 
-    myBtn.addEventListener('click', check);
-    
+    function playAgain(e) {
+        console.log('play again?')
+        let resultContainer = document.getElementById('resultContainer');
+        let playAgainButton = document.createElement('button');
+        playAgainButton.className = "btn btn-secondary mt-1";
+        playAgainButton.textContent = "Play Again?"
+        resultContainer.appendChild(playAgainButton);
+        playAgainButton.addEventListener('click', refreshPage);
+        // if(document.body.contains(playAgainButton)){
+        //     playAgain()
+        // } else {
+        //     console.log('Play again button is present')
+        // }
+        
 
+        
+    }
+    
+    //Create functionality for match to run if Key Enter is pressed.
+    myInput.addEventListener('keypress', function (e) {
+        var key = e.keyCode;
+        if (key === 13) { // 13 is enter
+          matched();
+          e.preventDefault();
+        }
+    });
+
+    function refreshPage(){
+        location.reload();
+    }
+
+    //Functionality for Submit button
+    myBtn.addEventListener('click', matched);
+    
 }
+
+    
+    
+    
+}
+
 
 
 

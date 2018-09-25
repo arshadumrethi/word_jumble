@@ -27,19 +27,22 @@
                             <button type="button" class="btn btn-secondary" onclick="levelChoice('4')">4</button>
                             <button type="button" class="btn btn-secondary" onclick="levelChoice('5')">5</button>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-danger ml-1" id="badge" ></button>
+                                <button type="button" class="btn btn-danger ml-1" id="badge" >?</button>
                               </div>
                         </div>
                         
                         
                         
-                        <button class="btn btn-primary mt-2" onclick="showJumbledWord()">Get Word</button>
+                        <button class="btn btn-primary mt-2" onclick="runGame()">Get Word</button>
                         
                         <h6 class="mt-4" id="message"></h5>
                         <h4><span class="mt-1" style="color: black; background-color: yellow" id="jumbledWord"></span></h5>
                         
-                        <div class="form-group" id="inp"></div>
-                        
+                        <div class="form-group" id="inputContainer"></div>
+                        <div id="resultContainer">
+                            <h4 id="successMessage"></h4>
+                            
+                        </div>
                     
                     </div>      
                 </div>
