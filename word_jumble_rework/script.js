@@ -19,7 +19,7 @@ const words = {
           a[j] = tmp;
       }
       return a.join("");
-  }
+}
 
 let lvl;
 
@@ -97,23 +97,17 @@ function runGame() {
     function fail() {
         myInput.value = ""
         successMessage.textContent = 'Try again';
-        playAgain()
+        
     }
 
     function playAgain(e) {
         console.log('play again?')
-        let resultContainer = document.getElementById('resultContainer');
-        let playAgainButton = document.createElement('button');
-        playAgainButton.className = "btn btn-secondary mt-1";
-        playAgainButton.textContent = "Play Again?"
-        resultContainer.appendChild(playAgainButton);
-        playAgainButton.addEventListener('click', refreshPage);
-        // if(document.body.contains(playAgainButton)){
-        //     playAgain()
-        // } else {
-        //     console.log('Play again button is present')
-        // }
-        
+            let resultContainer = document.getElementById('resultContainer');
+            let playAgainButton = document.createElement('button');
+            playAgainButton.className = "btn btn-secondary mt-1";
+            playAgainButton.textContent = "Play Again"
+            resultContainer.appendChild(playAgainButton);
+            playAgainButton.addEventListener('click', refreshPage);
 
         
     }
