@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Word Jumble by Arshad</title>
+
+    <h1>WORD JUMBLE</h1>
+    <h2>by Arshad Umrethi</h2>
+    <hr>
+  </head>
+
+  <body>
+    <h3 style="color:Blue"> Follow steps 1, 2 & 3</h3>
+
+    <h3>1. Choose a Difficulty Level</h3>
+    <div class="wrapper">
+      <button type="button" class="button" onclick="levelChoice('1')">1</button>
+      <button type="button" class="button" onclick="levelChoice('2')">2</button>
+      <button type="button" class="button" onclick="levelChoice('3')">3</button>
+      <button type="button" class="button" onclick="levelChoice('4')">4</button>
+      <button type="button" class="button" onclick="levelChoice('5')">5</button>
+    </div>
+    <h3 id="levelselected" style="color:#9519b7"></h3>
+    <h3>2. Now Click: </h3>
+    <div class="wrapper">
+      <button type="button" class="button" style="padding:10px 20px" onclick="runGame()">Run Game</button>
+    </div>
+
+    <h3>3. Un-Jumble this word: </h3>
+    <h2 id="jumbled"></h2>
+    <br>
+
+    <div class="wrapper">
+      <form class="" action="">
+        <input id="answer" type="text" placeholder="Type Answer.." value="">
+        <br>
+        <br>
+        <button type="button" class="enter" onclick="match()">Submit</button>
+      </form>
+    </div>
+
+    <h2 id="result" style="color:Red"></h2>
+    <br>
+    <div class="wrapper">
+      <button type="button" class="button" style="padding:10px 15px" onclick="playAgain()">Play Again</button>
+    </div>
+
+
+    <script src="script.js"></script>
+  </body>
+</html>

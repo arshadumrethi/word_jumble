@@ -1,96 +1,178 @@
-// Create object to contain words at every level in increasing Difficulty.
-// Starting with 4 letter words at level 1 and going up to 8 letter words
-// at level 5.
+
 const words = {
-  1: ["door", "fork", "crew", "bird", "joke", "quiz", "hazy", "maze", "numb", "howl"],
-  2: ["spoon", "knife", "board", "shine", "quilt", "clock", "judge", "clone", "clown", "jewel"],
-  3: ["pyjama", "zombie", "amazon", "forest", "grumpy", "bronze", "fluffy", "frozen", "duplex", "blazer"],
-  4: ["pumpkin", "project", "enclave", "quantum", "hammock", "blanket", "monster", "kitchen", "teacher", "diamond"],
-  5: ["paradise", "language", "business", "syllable", "treasure", "equation", "sandwich", "february", "champion", "umbrella"]
+    1: ["door", "fork", "crew", "bird", "joke", "quiz", "hazy", "maze", "numb", "howl"],
+    2: ["spoon", "knife", "board", "shine", "quilt", "clock", "judge", "clone", "clown", "jewel"],
+    3: ["pyjama", "zombie", "amazon", "forest", "grumpy", "bronze", "fluffy", "frozen", "duplex", "blazer"],
+    4: ["pumpkin", "project", "enclave", "quantum", "hammock", "blanket", "monster", "kitchen", "teacher", "diamond"],
+    5: ["paradise", "language", "business", "syllable", "treasure", "equation", "sandwich", "february", "champion", "umbrella"]
+  }
+  
+  // Create shuffle function using fisher yates algorithm in order to jumble words.
+  String.prototype.shuffle = function () {
+      var a = this.split(""),
+          n = a.length;
+  
+      for(var i = n - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i];
+          a[i] = a[j];
+          a[j] = tmp;
+      }
+      return a.join("");
 }
 
-// Create shuffle function using fisher yates algorithm in order to jumble words.
-String.prototype.shuffle = function () {
-    var a = this.split(""),
-        n = a.length;
+//Level choice variable
+let lvl;
 
-    for(var i = n - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var tmp = a[i];
-        a[i] = a[j];
-        a[j] = tmp;
-    }
-    return a.join("");
-}
-
-// Initialize global variables that will be used in functions.
-var num;
-var jumbled = document.getElementById('jumbled');
-var word = "";
-var result = document.getElementById("result");
-var levelselected = document.getElementById("levelselected");
-var buttons = document.querySelector("button");
-
-
-// Create a function that will be called on clicking the level buttons
-// this will set the level - num will be an integer passed to wordChoice function.
+//Level Choice function
 function levelChoice(n) {
-  // buttons.style.backgroundColor = "Blue";
-  levelselected.textContent = "Current level selected: " + n;
-  return num = n;
-}
-
-// This function will access the words object and select a random word from the
-// selceted array. The word selected is then shuffled using the shuffle function.
-function wordChoice(num) {
-  word = words[num][Math.floor(Math.random() * words[num].length)];
-  shuffledWord = word.shuffle();
-  if (word === shuffledWord) {
-    wordChoice(num);
-  } else {
-    return shuffledWord;
+    lvl = n;
+    let badge = document.getElementById('badge');
+    badge.textContent = lvl;
+    // console.log("Level is " + lvl);
   }
-}
 
-// runGame function will be called when runGame button is clicked and will display
-// the jumbled word at an h3 element whose id name is "jumbled".
+//RunGame function contains all game logic
 function runGame() {
-  jumbled.textContent = wordChoice(num);
-}
+    //Get a word from the dataset
+    unShuffledWord = words[lvl][Math.floor(Math.random() * words[lvl].length)];
 
-// match function will check if answer entered in input matches the original word.
-// returns success message or try again message.
-function match(e) {
+    //Shuffle the word
+    shuffledWord = unShuffledWord.shuffle();
+    
+    //Initialize UI vars
+    let jumbledWord = document.getElementById('jumbledWord');
+    let message = document.getElementById('message');
+    
+    //Error handling: We dont want the shuffled word to be the same as the original word
+    if (unShuffledWord === shuffledWord) {
+    
+    //Run the function again 
+    runGame(lvl);
+    
+    } else {
+    //Create Get New Word button
+    let getWordBtn = document.getElementById('getWordBtn');
+    getWordBtn.textContent = 'Get New Word'
 
-  //Initialize Variable and set it to value of input form.
-  var answer = document.getElementById("answer").value;
+    //Display message 
+    message.textContent = "Un-jumble this word:"
 
-  //Prevent match being called when input form is empty.
-  while (answer == "") {
-    return e.preventDefault();
-  }
+    //Display the jumbled word
+    jumbledWord.textContent = shuffledWord;
 
-  //Conditional Logic
-  if (answer == word) {
-    // console.log("yeah");
-    result.textContent = "You got it! Wana Play Again?";
-  } else {
-    // console.log("nah");
-    result.textContent = "That's not it, try again";
-  }
+    //Get New Word function
+    getWordBtn.addEventListener('mousedown', function(){
+        unShuffledWord = words[lvl][Math.floor(Math.random() * words[lvl].length)];
+        //Shuffle the word
+        shuffledWord = unShuffledWord.shuffle();;
+        jumbledWord.textContent = shuffledWord;
+    })
 
-}
 
-//Match function called if Key:Enter is pressed.
-answer.addEventListener('keypress', function (e) {
-    var key = e.keyCode;
-    if (key === 13) { // 13 is enter
-      match()
-      e.preventDefault();
+    //Create Input Container
+    let inputContainer = document.getElementById('inputContainer');
+
+    //Create Input
+    let myInput = document.createElement('input');
+    myInput.className = 'form-control';
+    myInput.id = 'result';
+    myInput.placeholder = 'Answer..'
+
+    //Create Submit Button
+    let myBtn = document.createElement('button');
+    myBtn.className = "btn btn-primary mt-1";
+    myBtn.type = "submit";
+    myBtn.textContent = "Submit";
+
+    //Create Shuffle Button
+    let shuffleBtn = document.createElement('button');
+    shuffleBtn.className = "btn btn-outline-secondary mt-1 mb-1";
+    shuffleBtn.type = "submit";
+    shuffleBtn.textContent = "Shuffle Word";
+
+    //Append Shuffle, Input & Button to Input Container
+    inputContainer.appendChild(shuffleBtn);
+    inputContainer.appendChild(myInput);
+    inputContainer.appendChild(myBtn);
+    
+    //Listen for click on shuffle
+    shuffleBtn.addEventListener('click', shuffleAgain)
+
+    //Shuffle function
+    function shuffleAgain() {
+        shuffledWord = unShuffledWord.shuffle();;
+        jumbledWord.textContent = shuffledWord;
+        if (shuffledWord === unShuffledWord) {
+            shuffleAgain();
+        }
     }
-});
 
-// Refresh the page and reload game.
-function playAgain() {
-    location.reload();
+    //Check if Input value matches Un Shuffled Word
+    function matched(e) {
+        if(myInput.value === unShuffledWord) {
+            success();
+            myInput.value = "";
+            getWordBtn.disabled = true; // Prevent get word being called again
+            e.target.removeEventListener('click', matched) // Prevent function being called again
+        } else {
+            fail();
+        } 
+    }
+
+    //Win Case function 
+    function success() {
+        myInput.style.borderColor = 'green';
+        successMessage = document.getElementById('successMessage');
+        successMessage.style.color = 'green';
+        let correctWord = myInput.value;
+        successMessage.textContent = `${correctWord} is the right word, You Win!`;
+        playAgain()
+        
+    }
+
+    //Lose Case function
+    function fail() {
+        myInput.value = ""
+        successMessage.textContent = 'Try again';
+        
+    }
+
+    //Play Again function
+    function playAgain(e) {
+        let resultContainer = document.getElementById('resultContainer');
+        let playAgainButton = document.createElement('button');
+        playAgainButton.className = "btn btn-secondary mt-1";
+        playAgainButton.textContent = "Play Again"
+        resultContainer.appendChild(playAgainButton);
+        playAgainButton.addEventListener('click', refreshPage);
+ 
+    }
+    
+    //Create functionality for match to run if Key Enter is pressed.
+    myInput.addEventListener('keypress', function (e) {
+        var key = e.keyCode;
+        if (key === 13) { // 13 is enter
+          matched(e);
+          e.preventDefault();
+        }
+    });
+    
+    function refreshPage(){
+        location.reload();
+    }
+
+    //Functionality for Submit button
+    myBtn.addEventListener('click', matched);
+    
 }
+
+    
+    
+    
+}
+
+
+
+
+
