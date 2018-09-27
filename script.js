@@ -110,7 +110,7 @@ function runGame() {
 
     //Check if Input value matches Un Shuffled Word
     function matched(e) {
-        if(myInput.value === unShuffledWord) {
+        if(myInput.value.toLowerCase() === unShuffledWord) {
             success();
             myInput.value = "";
             getWordBtn.disabled = true; // Prevent get word being called again
