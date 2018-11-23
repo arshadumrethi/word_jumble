@@ -126,7 +126,7 @@ function runGame() {
         successMessage = document.getElementById('successMessage');
         successMessage.style.color = 'green';
         let correctWord = myInput.value;
-        successMessage.textContent = `${correctWord} is the right word, You Win!`;
+        successMessage.textContent = `${correctWord} is correct, good going!`;
         playAgain()
         
     }
