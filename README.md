@@ -10,3 +10,10 @@ to the user to unjumble.
 2. Timer - Sets a time limit and displays time left.
 3. Points System - Keep score and save to DB
 4. User Accounts with scores mapped.
+
+Gameplay preview: 
+
+
+![alt text](https://github.com/arshadumrethi/word_jumble/blob/master/Assets/img1.png)
+
+![alt text](https://github.com/arshadumrethi/word_jumble/blob/master/Assets/img2.png)
